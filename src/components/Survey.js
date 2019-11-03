@@ -5,14 +5,14 @@ const firebase = require('firebase');
 const uuid = require('uuid');
 
 var firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECTID,
-  storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSENGINGSENDERID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENTID
+  apiKey: "AIzaSyD0EYybFgtDvcqnwOK90P6gQMs8y_2V1XY",
+  authDomain: "basic-survey.firebaseapp.com",
+  databaseURL: "https://basic-survey.firebaseio.com",
+  projectId: "basic-survey",
+  storageBucket: "basic-survey.appspot.com",
+  messagingSenderId: "91800356453",
+  appId: "1:91800356453:web:cec7c2fc3b96a07b00a88c",
+  measurementId: "G-6R3V7VS6F6"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -83,7 +83,7 @@ class Survey extends Component {
     if (this.state.studentName === '' && this.state.isSubmitted === false) {
       
       studentName =  <div>
-                      <h3>Hey Player! Please enter your name</h3> 
+                      <h3>Hey Player! <br/> Please enter your name</h3> 
                       <form onSubmit={this.nameSubmit}>
                         <input type="text" placeholder="Enter your name" ref="name" />
                       </form>

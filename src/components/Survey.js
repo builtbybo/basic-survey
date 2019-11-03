@@ -4,7 +4,7 @@ import { Form, Label, Input, } from 'reactstrap';
 const firebase = require('firebase');
 const uuid = require('uuid');
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyD0EYybFgtDvcqnwOK90P6gQMs8y_2V1XY",
   authDomain: "basic-survey.firebaseapp.com",
   databaseURL: "https://basic-survey.firebaseio.com",
@@ -14,6 +14,19 @@ var firebaseConfig = {
   appId: "1:91800356453:web:cec7c2fc3b96a07b00a88c",
   measurementId: "G-6R3V7VS6F6"
 };
+
+// const firebaseConfig = {
+//   apiKey: process.env.FIREBASE_API_KEY,
+//   authDomain: process.env.FIREBASE_AUTHDOMAIN,
+//   databaseURL: process.env.FIREBASE_DATABASE_URL,
+//   projectId: process.env.FIREBASE_PROJECTID,
+//   storageBucket: process.env.FIREBASE_STORAGEBUCKET,
+//   messagingSenderId: process.env.FIREBASE_MESSENGINGSENDERID,
+//   appId: process.env.FIREBASE_APP_ID,
+//   measurementId: process.env.MEASUREMENT_ID
+// }
+
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

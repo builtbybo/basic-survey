@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/basic-survey/static/css/main.7c2d99e8.chunk.css",
+    "main.css": "/basic-survey/static/css/main.9667d4a8.chunk.css",
     "main.js": "/basic-survey/static/js/main.ee032a30.chunk.js",
     "main.js.map": "/basic-survey/static/js/main.ee032a30.chunk.js.map",
     "runtime-main.js": "/basic-survey/static/js/runtime-main.b6167c9e.js",
@@ -8,15 +8,15 @@
     "static/js/2.4b3d6970.chunk.js": "/basic-survey/static/js/2.4b3d6970.chunk.js",
     "static/js/2.4b3d6970.chunk.js.map": "/basic-survey/static/js/2.4b3d6970.chunk.js.map",
     "index.html": "/basic-survey/index.html",
-    "precache-manifest.9270d863952a0f78361b636f436ea2e8.js": "/basic-survey/precache-manifest.9270d863952a0f78361b636f436ea2e8.js",
+    "precache-manifest.f4ba08b1b9f45dfb0928c12bbc0c3704.js": "/basic-survey/precache-manifest.f4ba08b1b9f45dfb0928c12bbc0c3704.js",
     "service-worker.js": "/basic-survey/service-worker.js",
-    "static/css/main.7c2d99e8.chunk.css.map": "/basic-survey/static/css/main.7c2d99e8.chunk.css.map",
+    "static/css/main.9667d4a8.chunk.css.map": "/basic-survey/static/css/main.9667d4a8.chunk.css.map",
     "static/media/harry-potter-logo.png": "/basic-survey/static/media/harry-potter-logo.7dc60e6c.png"
   },
   "entrypoints": [
     "static/js/runtime-main.b6167c9e.js",
     "static/js/2.4b3d6970.chunk.js",
-    "static/css/main.7c2d99e8.chunk.css",
+    "static/css/main.9667d4a8.chunk.css",
     "static/js/main.ee032a30.chunk.js"
   ]
 }

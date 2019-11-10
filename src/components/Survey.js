@@ -107,7 +107,7 @@ class Survey extends Component {
                       <form onSubmit={this.questionsSubmitted}>
                         
                         <section>
-                        <h2>1. What is your Hogwarts House?</h2>
+                        <h3>1. What is your Hogwarts House?</h3>
                             <br/>
                             <ul>
                               <li>
@@ -160,7 +160,7 @@ class Survey extends Component {
                         </section>
                         {/* Q2 */}
                         <section>
-                        <h2>2. Who is your favourite Harry Potter character?</h2>
+                        <h3>2. Who is your favourite Harry Potter character?</h3>
                             <br/>
                             <ul>
                               <li>
@@ -213,7 +213,7 @@ class Survey extends Component {
 
                         {/*  Q2  */}
                         <section>
-                        <h2>3. What is the best wizarding spell?</h2>
+                        <h3>3. What is the best wizarding spell?</h3>
                             <ul>
                               <li>
                                 <label className="btn-radio">
@@ -264,7 +264,7 @@ class Survey extends Component {
                             
                         </section>
                         <section>
-                        <h2>Who is the worst Harry Potter baddie?</h2>
+                        <h3>4. Who is the worst Harry Potter baddie?</h3>
                             <br/>
                             <ul>
                               <li>
@@ -328,7 +328,7 @@ class Survey extends Component {
 
 
                         <section>
-              <h2>Who is your favourite Hogwarts staff member</h2>
+              <h3>5. Who is your favourite Hogwarts staff member? </h3>
                             <ul>
                               <li>
                                 <label className="btn-radio">

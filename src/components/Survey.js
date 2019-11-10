@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Form, Label, Input, } from 'reactstrap';
 
 const firebase = require('firebase');
 const uuid = require('uuid');
@@ -33,8 +32,8 @@ firebase.initializeApp(firebaseConfig);
 class Survey extends Component {
 
   nameSubmit(event){
-    var studentName = this.refs.name.value;
-    this.setState({studentName : studentName}, function(){
+    var userName = this.refs.name.value;
+    this.setState({ userName: userName}, function(){
       console.log(this.state)
     })
   }
@@ -60,7 +59,7 @@ class Survey extends Component {
 
   questionsSubmitted() {
     firebase.database().ref('basic-survey/'+this.state.uid).set({
-      studentName : this.state.studentName,
+      userName: this.state.userName,
       answers : this.state.answers
     });
 
@@ -72,7 +71,7 @@ class Survey extends Component {
   
     this.state = {
        uid : uuid.v1(),
-       studentName: '',
+      userName: '',
        answers: {
          answer1:'',
          answer2:'',
@@ -90,75 +89,327 @@ class Survey extends Component {
   
 
   render() {
-    let studentName;
+    let userName;
     let questions;
 
-    if (this.state.studentName === '' && this.state.isSubmitted === false) {
+    if (this.state.userName === '' && this.state.isSubmitted === false) {
       
-      studentName =  <div>
-                      <h3>Hey Player! <br/> Please enter your name</h3> 
+      userName =  <div>
                       <form onSubmit={this.nameSubmit}>
-                        <input type="text" placeholder="Enter your name" ref="name" />
+                        <input type="text" placeholder="Please enter your name" ref="name" />
                       </form>
                     </div>;
       questions ='';
 
-    } else if (this.state.studentName !== '' && this.state.isSubmitted === false) {
-        studentName = <h3> {this.state.studentName}, please answer these questions:</h3>;
-        questions = <div>
-                    <h3>Hello there, {this.state.studentName} - Here are some questions:</h3>
-                      <Form onSubmit={this.questionsSubmitted}>
-                        <div>
-                            <Label>What's your Hogwarts House?</Label>
+    } else if (this.state.userName !== '' && this.state.isSubmitted === false) {
+      userName = <h3>Hello there <span className="userName">{this.state.userName}</span>, please answer these survey questions:</h3>;
+        questions = <div className="container">
+                      <form onSubmit={this.questionsSubmitted}>
+                        
+                        <section>
+                        <h2>1. What is your Hogwarts House?</h2>
                             <br/>
-                            <Input type="radio" name="answer1" value="Gryffindor" onChange={this.answerSelected} /> Gryffindor
-                            <Input type="radio" name="answer1" value="Hufflepuff" onChange={this.answerSelected} /> Hufflepuff
-                            <Input type="radio" name="answer1" value="Ravenclaw" onChange={this.answerSelected} /> Ravenclaw
-                            <Input type="radio" name="answer1" value="Slytherin" onChange={this.answerSelected} /> Slytherin
-                        </div>
-                        <div>
-                            <Label>Who is your favourite Harry Potter character?</Label>
+                            <ul>
+                              <li>
+                                <label className="btn-radio">
+                                    <input type="radio" name="answer1" value="Gryffindor" onChange={this.answerSelected} /> 
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                                    <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Gryffindor</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                <input type="radio" name="answer1" value="Hufflepuff" onChange={this.answerSelected} /> 
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Hufflepuff</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                <input type="radio" name="answer1" value="Ravenclaw" onChange={this.answerSelected} /> 
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                <span>Ravenclaw</span>
+                                </label>
+
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                <input type="radio" name="answer1" value="Slytherin" onChange={this.answerSelected} /> 
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                <span>Slytherin</span>
+                                </label>
+
+                              </li>
+                            </ul>
+                        </section>
+                        {/* Q2 */}
+                        <section>
+                        <h2>2. Who is your favourite Harry Potter character?</h2>
                             <br/>
-                            <Input type="radio" name="answer2" value="Harry" onChange={this.answerSelected} /> Harry
-                            <Input type="radio" name="answer2" value="Ron" onChange={this.answerSelected} /> Ron
-                            <Input type="radio" name="answer2" value="Hermione" onChange={this.answerSelected} /> Hermione
-                            <Input type="radio" name="answer2" value="Other" onChange={this.answerSelected} /> Other
-                        </div>
-                        <div>
-                            <Label>What is your favourite Harry Potter spell?</Label>
+                            <ul>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer2" value="Harry" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Harry</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer2" value="Ron" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Ron</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer2" value="Hermione" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Hermione</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer2" value="Other" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Other</span>
+                                </label>
+                              </li>
+                            </ul>
+                           
+                        </section>
+
+                        {/*  Q2  */}
+                        <section>
+                        <h2>3. What is the best wizarding spell?</h2>
+                            <ul>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer3" value="Lumos" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Lumos</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer3" value="Expelliarmus" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Expelliarmus</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer3" value="Alohomora" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Alohomora</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer3" value="Other" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Other</span>
+                                </label>
+                              </li>
+
+                            </ul>
+                            
+                        </section>
+                        <section>
+                        <h2>Who is the worst Harry Potter baddie?</h2>
                             <br/>
-                            <Input type="radio" name="answer3" value="Lumos" onChange={this.answerSelected} /> Lumos
-                            <Input type="radio" name="answer3" value="Expelliarmus" onChange={this.answerSelected} /> Expelliarmus
-                            <Input type="radio" name="answer3" value="Alohomora" onChange={this.answerSelected} /> Alohomora
-                            <Input type="radio" name="answer3" value="Other" onChange={this.answerSelected} /> Other
-                        </div>
-                        <div>
-                            <Label>Who is your favourite Harry Potter baddie?</Label>
-                            <br/>
-                            <Input type="radio" name="answer4" value="Gellert Grindelwald" onChange={this.answerSelected} /> Gellert Grindelwald
-                            <Input type="radio" name="answer4" value="Dolores Umbridge" onChange={this.answerSelected} /> Dolores Umbridge
-                            <Input type="radio" name="answer4" value="Bellatrix Lestrange" onChange={this.answerSelected} /> Bellatrix Lestrange
-                            <Input type="radio" name="answer4" value="Voldemort" onChange={this.answerSelected} /> Voldemort
-                        </div>
-                        <div>
-                            <Label>What is the tastiest Harry Potter candy??</Label>
-                            <br/>
-                            <Input type="radio" name="answer5" value="Chocolate Frog" onChange={this.answerSelected} /> Chocolate Frog
-                            <Input type="radio" name="answer5" value="Bertie Botts Beans" onChange={this.answerSelected} /> Bertie Botts Beans
-                            <Input type="radio" name="answer5" value="Butterbeer" onChange={this.answerSelected} /> Butterbeer
-                            <Input type="radio" name="answer5" value="Other" onChange={this.answerSelected} /> Other
-                        </div>
-                        <Input type="submit" value="submit" />
-                      </Form>
+                            <ul>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer4" value="Gellert Grindelwald" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Gellert Grindelwald</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer4" value="Voldemort" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Voldemort</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer4" value="Bellatrix Lestrange" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Bellatrix Lestrange</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer4" value="Dolores Umbridge" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Dolores Umbridge</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer4" value="Other" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Other</span>
+                                </label>
+                              </li>
+                             
+                            </ul>
+                        </section>
+
+
+                        <section>
+              <h2>Who is your favourite Hogwarts staff member</h2>
+                            <ul>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer5" value="Minerva McGonagall" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Minerva McGonagall</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer5" value="Quirinus Quirrell" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Quirinus Quirrell</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer5" value="Albus Dumbledore" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Albus Dumbledore</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer5" value="Severus Snape" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Severus Snape</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer5" value="Rubuis Hagrid" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                <span>Rubuis Hagrid</span>
+                                </label>
+                              </li>
+                              <li>
+                                <label className="btn-radio">
+                                  <input type="radio" name="answer5" value="Other" onChange={this.answerSelected} />
+                                  <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                    <circle cx="10" cy="10" r="9"></circle>
+                      <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" className="inner"></path>
+                      <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" className="outer"></path>
+                                  </svg>
+                                  <span>Other</span>
+                                </label>
+                              </li>
+
+                            </ul>
+                        </section>
+                        <input type="submit"  value="submit" />
+                      </form>
                     </div>;
                   
     } else if (this.state.isSubmitted === true) {
-      studentName = <h3>Thanks, {this.state.studentName}. Your answers have been submitted</h3>;
+      userName = <h3>Thanks, Your answers have been submitted</h3>;
     }
     return (
       <div>
-        {studentName}
-        <hr/>
+        {userName}
+        
         {questions}
       </div>
     )

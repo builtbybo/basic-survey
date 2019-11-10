@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './images/harry-potter-logo.png';
 import './App.css';
 import Survey from './components/Survey';
 
@@ -9,8 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        
-          Basic Survey
+          Harry Potter Survey
         <Survey />
 
       </header>

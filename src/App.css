@@ -31,7 +31,6 @@
   position: relative;
   margin: 20px auto;
   height: auto;
-  width: 500px;
   padding: 20px;
 }
 
@@ -177,7 +176,6 @@ h3 {
 
 input[type=text]{
     display: inline-block;
-    width: 500px;
     height: 40px;
     box-sizing: border-box;
     outline: none;
